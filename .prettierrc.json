@@ -9,7 +9,12 @@
     "prettier-plugin-brace-style",
     "prettier-plugin-merge"
   ],
-  "importOrder": ["^(.*)\\.css$", "<THIRD_PARTY_MODULES>", "^@/(.*)$", "^\\.(.*)$"],
+  "importOrder": [
+    "^(.*)\\.css$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^\\.(.*)$"
+  ],
   "importOrderSeparation": true,
   "braceStyle": "stroustrup"
 }

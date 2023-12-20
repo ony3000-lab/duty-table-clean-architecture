@@ -2,7 +2,10 @@ export default function Custom500() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div>
-        <h1 className="mr-5 inline-block border-r border-black/30 pr-6 align-top text-[24px] font-medium leading-[48px]">
+        <h1
+          className="mr-5 inline-block border-r border-black/30 pr-6 align-top text-[24px]
+            font-medium leading-[48px]"
+        >
           500
         </h1>
         <div className="inline-block text-left">
