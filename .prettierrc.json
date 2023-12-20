@@ -1,0 +1,16 @@
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "singleAttributePerLine": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-brace-style",
+    "prettier-plugin-merge"
+  ],
+  "importOrder": ["^(.*)\\.css$", "<THIRD_PARTY_MODULES>", "^@/(.*)$", "^\\.(.*)$"],
+  "importOrderSeparation": true,
+  "braceStyle": "stroustrup"
+}
