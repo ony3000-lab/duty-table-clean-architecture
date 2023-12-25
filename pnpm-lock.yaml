@@ -110,6 +110,26 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
 
+  layers/layer-0: {}
+
+  layers/layer-1:
+    dependencies:
+      layer-0:
+        specifier: workspace:*
+        version: link:../layer-0
+
+  layers/layer-2:
+    dependencies:
+      layer-1:
+        specifier: workspace:*
+        version: link:../layer-1
+
+  layers/layer-3:
+    dependencies:
+      layer-2:
+        specifier: workspace:*
+        version: link:../layer-2
+
 packages:
 
   /@adobe/css-tools@4.2.0:

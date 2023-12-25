@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "layer-3",
+  "version": "0.0.0",
+  "dependencies": {
+    "layer-2": "workspace:*"
+  }
+}
