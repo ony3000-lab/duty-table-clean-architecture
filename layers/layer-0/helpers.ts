@@ -1,0 +1,21 @@
+import type { Day, Slot } from './entities';
+
+export function weightedValueOf(day: Day) {
+  if (day.isPublicHoliday || [SAT, SUN].includes(day.dayOfTheWeek)) {
+    return 2;
+  }
+
+  if ([FRI].includes(day.dayOfTheWeek)) {
+    return 1.5;
+  }
+
+  return 1;
+}
+
+export function isWeekend(day: Day) {
+  return [FRI, SAT, SUN].includes(day.dayOfTheWeek);
+}
+
+export function totalWeightedValueOf(slotList: Slot[]) {
+  return slotList.reduce((total, slot) => total + weightedValueOf(slot.day), 0);
+}
