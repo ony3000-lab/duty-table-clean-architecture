@@ -19,3 +19,9 @@ export function isWeekend(day: Day) {
 export function totalWeightedValueOf(slotList: Slot[]) {
   return slotList.reduce((total, slot) => total + weightedValueOf(slot.day), 0);
 }
+
+export function areAllSlotsAssignedDoctor(
+  slotList: Slot[],
+): slotList is Required<Slot>[] {
+  return slotList.every((slot) => slot.doctor !== undefined);
+}
