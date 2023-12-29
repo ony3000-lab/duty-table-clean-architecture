@@ -1,5 +1,7 @@
 import type { Doctor, Day, Slot } from 'layer-0/entities';
 
+export type { Doctor, Day, Slot };
+
 export interface UniqueIDService {
   createID(): string;
 }

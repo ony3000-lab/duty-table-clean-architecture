@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/uuid": "9.0.7",
     "layer-1": "workspace:*",
+    "nanostores": "0.9.5",
     "uuid": "9.0.1"
   }
 }
