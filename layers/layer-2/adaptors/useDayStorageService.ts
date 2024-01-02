@@ -16,21 +16,21 @@ const $dayList = atom<Day[]>(
 );
 
 export function useDayStorageService(): DayStorageService {
-  const dayList = useStore($dayList);
+  useStore($dayList);
 
   return {
     updateItem(day) {
       $dayList.set([
-        ...dayList.map((item) =>
-          item.id === day.id ? { ...item, ...day } : item,
-        ),
+        ...$dayList
+          .get()
+          .map((item) => (item.id === day.id ? { ...item, ...day } : item)),
       ]);
     },
     indexOf(day) {
-      return dayList.findIndex((item) => item.id === day.id);
+      return $dayList.get().findIndex((item) => item.id === day.id);
     },
     getItems() {
-      return dayList;
+      return $dayList.get();
     },
   };
 }

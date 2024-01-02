@@ -6,17 +6,17 @@ import { atom } from 'nanostores';
 const $slotList = atom<Slot[]>([]);
 
 export function useSlotStorageService(): SlotStorageService {
-  const slotList = useStore($slotList);
+  useStore($slotList);
 
   return {
     addItem(slot) {
-      $slotList.set([...slotList, slot]);
+      $slotList.set([...$slotList.get(), slot]);
     },
     removeItem(slot) {
-      $slotList.set([...slotList.filter((item) => item.id !== slot.id)]);
+      $slotList.set([...$slotList.get().filter((item) => item.id !== slot.id)]);
     },
     getItems() {
-      return slotList;
+      return $slotList.get();
     },
   };
 }

@@ -6,17 +6,19 @@ import { atom } from 'nanostores';
 const $doctorList = atom<Doctor[]>([]);
 
 export function useDoctorStorageService(): DoctorStorageService {
-  const doctorList = useStore($doctorList);
+  useStore($doctorList);
 
   return {
     addItem(doctor) {
-      $doctorList.set([...doctorList, doctor]);
+      $doctorList.set([...$doctorList.get(), doctor]);
     },
     removeItem(doctor) {
-      $doctorList.set([...doctorList.filter((item) => item.id !== doctor.id)]);
+      $doctorList.set([
+        ...$doctorList.get().filter((item) => item.id !== doctor.id),
+      ]);
     },
     getItems() {
-      return doctorList;
+      return $doctorList.get();
     },
   };
 }
