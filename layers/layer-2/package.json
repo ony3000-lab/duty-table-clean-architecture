@@ -3,6 +3,8 @@
   "name": "layer-2",
   "version": "0.0.0",
   "dependencies": {
+    "@nanostores/logger": "0.2.4",
+    "@nanostores/react": "0.7.1",
     "@types/uuid": "9.0.7",
     "layer-1": "workspace:*",
     "nanostores": "0.9.5",
