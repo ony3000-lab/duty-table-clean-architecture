@@ -15,6 +15,7 @@ export interface DoctorStorageService {
 export interface DayStorageService {
   updateItem(day: Day): void;
   indexOf(day: Day): number;
+  getItems(): Day[];
 }
 
 export interface SlotStorageService {

@@ -29,6 +29,9 @@ export function useDayStorageService(): DayStorageService {
     indexOf(day) {
       return dayList.findIndex((item) => item.id === day.id);
     },
+    getItems() {
+      return dayList;
+    },
   };
 }
 
