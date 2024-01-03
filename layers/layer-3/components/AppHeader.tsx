@@ -5,18 +5,22 @@ import { useCallback } from 'react';
 export function AppHeader() {
   const { calculateTimetable } = useTimetable();
 
-  const clickHandler = useCallback(async (e: SyntheticEvent) => {
-    try {
-      const result = await calculateTimetable();
+  const clickHandler = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async (e: SyntheticEvent) => {
+      try {
+        const result = await calculateTimetable();
 
-      console.log('계산 성공!');
-      console.log(result);
-    }
-    catch (err) {
-      console.log('계산 실패!');
-      console.log(err);
-    }
-  }, []);
+        console.log('계산 성공!');
+        console.log(result);
+      }
+      catch (err) {
+        console.log('계산 실패!');
+        console.log(err);
+      }
+    },
+    [calculateTimetable],
+  );
 
   return (
     <div>

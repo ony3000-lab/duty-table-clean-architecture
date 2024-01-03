@@ -6,18 +6,21 @@ import { useCallback } from 'react';
 export function DoctorLineup() {
   const { doctorList, createDoctor, deleteDoctor } = useDoctor();
 
-  const submitHandler = useCallback((e: SyntheticEvent) => {
-    e.preventDefault();
+  const submitHandler = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
 
-    const { currentTarget } = e;
+      const { currentTarget } = e;
 
-    if (currentTarget instanceof HTMLFormElement) {
-      const element = currentTarget.username as HTMLInputElement;
+      if (currentTarget instanceof HTMLFormElement) {
+        const element = currentTarget.username as HTMLInputElement;
 
-      createDoctor(element.value.trim());
-      element.value = '';
-    }
-  }, []);
+        createDoctor(element.value.trim());
+        element.value = '';
+      }
+    },
+    [createDoctor],
+  );
 
   return (
     <div className="w-60 space-y-4 rounded-xl border-2 border-gray-500 p-4">

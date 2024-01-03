@@ -228,7 +228,7 @@ export async function calculateTimetable(deps: {
           if (availableSlotListOfFormerDoctor.length === 0) {
             return 1;
           }
-          else if (availableSlotListOfLatterDoctor.length === 0) {
+          if (availableSlotListOfLatterDoctor.length === 0) {
             return -1;
           }
 

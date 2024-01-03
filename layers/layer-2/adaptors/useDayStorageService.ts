@@ -6,13 +6,11 @@ import { atom } from 'nanostores';
 import { uniqueIDService } from './UniqueIDService';
 
 const $dayList = atom<Day[]>(
-  [...Array(14)].map((_, index) => {
-    return {
-      id: uniqueIDService.createID(),
-      dayOfTheWeek: ((1 + index) % 7) as DayOfTheWeek,
-      isPublicHoliday: false,
-    };
-  }),
+  [...Array(14)].map((_, index) => ({
+    id: uniqueIDService.createID(),
+    dayOfTheWeek: ((1 + index) % 7) as DayOfTheWeek,
+    isPublicHoliday: false,
+  })),
 );
 
 export function useDayStorageService(): DayStorageService {

@@ -10,14 +10,12 @@ export function useDay() {
   const slotStorageService = useSlotStorageService();
 
   return {
-    dayListContainingSlotList: dayStorageService.getItems().map((day) => {
-      return {
-        ...day,
-        slotList: slotStorageService
-          .getItems()
-          .filter((slot) => slot.day.id === day.id),
-      };
-    }),
+    dayListContainingSlotList: dayStorageService.getItems().map((day) => ({
+      ...day,
+      slotList: slotStorageService
+        .getItems()
+        .filter((slot) => slot.day.id === day.id),
+    })),
     togglePublicHoliday<T extends Day>(extendedDay: T) {
       const day = dayStorageService
         .getItems()
