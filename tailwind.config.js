@@ -1,11 +1,15 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {(size: string) => string} */
-const rem2px = (size) => `${Number.parseFloat(size) * 16}px`;
+const rem2px = (size) =>
+  `${Number.parseFloat(size) * 16}px`;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}', './layers/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './layers/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     borderRadius: {
       none: '0px',
@@ -47,14 +51,38 @@ module.exports = {
       '7xl': rem2px('80rem'),
     },
     fontSize: {
-      xs: [rem2px('0.75rem'), { lineHeight: rem2px('1rem') }],
-      sm: [rem2px('0.875rem'), { lineHeight: rem2px('1.25rem') }],
-      base: [rem2px('1rem'), { lineHeight: rem2px('1.5rem') }],
-      lg: [rem2px('1.125rem'), { lineHeight: rem2px('1.75rem') }],
-      xl: [rem2px('1.25rem'), { lineHeight: rem2px('1.75rem') }],
-      '2xl': [rem2px('1.5rem'), { lineHeight: rem2px('2rem') }],
-      '3xl': [rem2px('1.875rem'), { lineHeight: rem2px('2.25rem') }],
-      '4xl': [rem2px('2.25rem'), { lineHeight: rem2px('2.5rem') }],
+      xs: [
+        rem2px('0.75rem'),
+        { lineHeight: rem2px('1rem') },
+      ],
+      sm: [
+        rem2px('0.875rem'),
+        { lineHeight: rem2px('1.25rem') },
+      ],
+      base: [
+        rem2px('1rem'),
+        { lineHeight: rem2px('1.5rem') },
+      ],
+      lg: [
+        rem2px('1.125rem'),
+        { lineHeight: rem2px('1.75rem') },
+      ],
+      xl: [
+        rem2px('1.25rem'),
+        { lineHeight: rem2px('1.75rem') },
+      ],
+      '2xl': [
+        rem2px('1.5rem'),
+        { lineHeight: rem2px('2rem') },
+      ],
+      '3xl': [
+        rem2px('1.875rem'),
+        { lineHeight: rem2px('2.25rem') },
+      ],
+      '4xl': [
+        rem2px('2.25rem'),
+        { lineHeight: rem2px('2.5rem') },
+      ],
       '5xl': [rem2px('3rem'), { lineHeight: '1' }],
       '6xl': [rem2px('3.75rem'), { lineHeight: '1' }],
       '7xl': [rem2px('4.5rem'), { lineHeight: '1' }],
@@ -137,10 +165,15 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-pretendard)', ...fontFamily.sans],
+        sans: [
+          'var(--font-pretendard)',
+          ...fontFamily.sans,
+        ],
       },
       screens: {
-        'non-touch-device': { raw: '(hover: hover) and (pointer: fine)' },
+        'non-touch-device': {
+          raw: '(hover: hover) and (pointer: fine)',
+        },
       },
     },
   },

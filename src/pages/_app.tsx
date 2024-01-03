@@ -5,7 +5,10 @@ import { RecoilRoot } from 'recoil';
 
 import { AppMain } from '@/components';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps,
+}: AppProps) {
   return (
     <RecoilRoot>
       <AppMain>

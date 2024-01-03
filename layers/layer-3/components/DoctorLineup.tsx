@@ -4,7 +4,8 @@ import type { SyntheticEvent } from 'react';
 import { useCallback } from 'react';
 
 export function DoctorLineup() {
-  const { doctorList, createDoctor, deleteDoctor } = useDoctor();
+  const { doctorList, createDoctor, deleteDoctor } =
+    useDoctor();
 
   const submitHandler = useCallback(
     (e: SyntheticEvent) => {
@@ -13,7 +14,8 @@ export function DoctorLineup() {
       const { currentTarget } = e;
 
       if (currentTarget instanceof HTMLFormElement) {
-        const element = currentTarget.username as HTMLInputElement;
+        const element =
+          currentTarget.username as HTMLInputElement;
 
         createDoctor(element.value.trim());
         element.value = '';
@@ -29,8 +31,9 @@ export function DoctorLineup() {
           type="text"
           name="username"
           placeholder="홍길동"
-          className="form-input ps-9 relative block w-full rounded-md border-0 bg-white px-2.5 py-1.5
-            text-sm text-gray-900 placeholder-gray-400 shadow-sm ring-1 ring-inset
+          className="form-input ps-9 relative block w-full rounded-md border-0
+            bg-white px-2.5 py-1.5 text-sm text-gray-900
+            placeholder-gray-400 shadow-sm ring-1 ring-inset
             ring-gray-300"
         />
       </form>
@@ -40,8 +43,9 @@ export function DoctorLineup() {
             {doctorList.map((doctor) => (
               <li
                 key={doctor.id}
-                className="relative flex items-center justify-between rounded-md border-0 bg-white px-2.5
-                  py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
+                className="relative flex items-center justify-between rounded-md
+                  border-0 bg-white px-2.5 py-1.5 text-sm text-gray-900
+                  shadow-sm ring-1 ring-inset ring-gray-300"
               >
                 <span>{doctor.name}</span>
                 <button

@@ -26,8 +26,9 @@ export function AppHeader() {
     <div>
       <button
         type="button"
-        className="inline-flex flex-shrink-0 items-center gap-x-1.5 rounded-md bg-gray-500 px-2.5
-          py-1.5 text-sm font-medium text-white shadow-sm hover:bg-gray-600"
+        className="inline-flex flex-shrink-0 items-center gap-x-1.5 rounded-md
+          bg-gray-500 px-2.5 py-1.5 text-sm font-medium text-white
+          shadow-sm hover:bg-gray-600"
         onClick={clickHandler}
       >
         시간표 계산

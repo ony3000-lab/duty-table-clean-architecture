@@ -21,11 +21,15 @@ export function useDayStorageService(): DayStorageService {
       $dayList.set([
         ...$dayList
           .get()
-          .map((item) => (item.id === day.id ? { ...item, ...day } : item)),
+          .map((item) =>
+            item.id === day.id ? { ...item, ...day } : item,
+          ),
       ]);
     },
     indexOf(day) {
-      return $dayList.get().findIndex((item) => item.id === day.id);
+      return $dayList
+        .get()
+        .findIndex((item) => item.id === day.id);
     },
     getItems() {
       return $dayList.get();

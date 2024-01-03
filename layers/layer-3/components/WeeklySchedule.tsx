@@ -24,7 +24,11 @@ export function WeeklySchedule() {
           <div key={extendedDay.id}>
             <div className="w-32 overflow-hidden rounded-xl border border-gray-500">
               <div className="bg-gray-300 px-4 py-1 text-center">
-                {dayOfTheWeekStringList[extendedDay.dayOfTheWeek]}
+                {
+                  dayOfTheWeekStringList[
+                    extendedDay.dayOfTheWeek
+                  ]
+                }
               </div>
               <hr />
               <div className="space-y-2 py-1">
@@ -33,7 +37,9 @@ export function WeeklySchedule() {
                   <button
                     type="button"
                     className="h-5 w-5"
-                    onClick={() => togglePublicHoliday(extendedDay)}
+                    onClick={() =>
+                      togglePublicHoliday(extendedDay)
+                    }
                   >
                     {extendedDay.isPublicHoliday ? (
                       <SolidCheckCircleIcon />
@@ -46,7 +52,9 @@ export function WeeklySchedule() {
                   <button
                     type="button"
                     className="h-4 w-4"
-                    onClick={() => deleteSlot(extendedDay.slotList[0])}
+                    onClick={() =>
+                      deleteSlot(extendedDay.slotList[0])
+                    }
                   >
                     <MinusIcon />
                   </button>
@@ -65,13 +73,16 @@ export function WeeklySchedule() {
                 {extendedDay.slotList.map((slot) => (
                   <li
                     key={slot.id}
-                    className="flex items-center space-x-2 rounded-md bg-white px-2 py-1 text-sm text-gray-900
-                      shadow-sm ring-1 ring-inset ring-gray-300"
+                    className="flex items-center space-x-2 rounded-md bg-white px-2 py-1
+                      text-sm text-gray-900 shadow-sm ring-1 ring-inset
+                      ring-gray-300"
                   >
                     <span className="inline-flex h-4 w-4 items-center text-[16px]">
                       <UserIcon />
                     </span>
-                    <span>{slot.doctor?.name ?? <>&nbsp;</>}</span>
+                    <span>
+                      {slot.doctor?.name ?? <>&nbsp;</>}
+                    </span>
                   </li>
                 ))}
               </ul>

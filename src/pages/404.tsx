@@ -3,8 +3,8 @@ export default function Custom404() {
     <div className="flex h-screen w-screen items-center justify-center">
       <div>
         <h1
-          className="mr-5 inline-block border-r border-black/30 pr-6 align-top text-[24px]
-            font-medium leading-[48px]"
+          className="mr-5 inline-block border-r border-black/30 pr-6 align-top
+            text-[24px] font-medium leading-[48px]"
         >
           404
         </h1>

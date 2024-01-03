@@ -1,5 +1,13 @@
 /* eslint-disable import/no-relative-packages */
-import { SUN, MON, TUE, WED, THU, FRI, SAT } from 'shared-kernel';
+import {
+  SUN,
+  MON,
+  TUE,
+  WED,
+  THU,
+  FRI,
+  SAT,
+} from 'shared-kernel';
 
 import type {
   DoctorStorageService,
@@ -24,20 +32,76 @@ const dayListMock: {
   dayOfTheWeek: DayOfTheWeek;
   isPublicHoliday: boolean;
 }[] = [
-  { id: 'day-1', dayOfTheWeek: MON, isPublicHoliday: false },
-  { id: 'day-2', dayOfTheWeek: TUE, isPublicHoliday: false },
-  { id: 'day-3', dayOfTheWeek: WED, isPublicHoliday: false },
-  { id: 'day-4', dayOfTheWeek: THU, isPublicHoliday: false },
-  { id: 'day-5', dayOfTheWeek: FRI, isPublicHoliday: false },
-  { id: 'day-6', dayOfTheWeek: SAT, isPublicHoliday: false },
-  { id: 'day-7', dayOfTheWeek: SUN, isPublicHoliday: false },
-  { id: 'day-8', dayOfTheWeek: MON, isPublicHoliday: false },
-  { id: 'day-9', dayOfTheWeek: TUE, isPublicHoliday: false },
-  { id: 'day-10', dayOfTheWeek: WED, isPublicHoliday: false },
-  { id: 'day-11', dayOfTheWeek: THU, isPublicHoliday: false },
-  { id: 'day-12', dayOfTheWeek: FRI, isPublicHoliday: false },
-  { id: 'day-13', dayOfTheWeek: SAT, isPublicHoliday: false },
-  { id: 'day-14', dayOfTheWeek: SUN, isPublicHoliday: false },
+  {
+    id: 'day-1',
+    dayOfTheWeek: MON,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-2',
+    dayOfTheWeek: TUE,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-3',
+    dayOfTheWeek: WED,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-4',
+    dayOfTheWeek: THU,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-5',
+    dayOfTheWeek: FRI,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-6',
+    dayOfTheWeek: SAT,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-7',
+    dayOfTheWeek: SUN,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-8',
+    dayOfTheWeek: MON,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-9',
+    dayOfTheWeek: TUE,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-10',
+    dayOfTheWeek: WED,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-11',
+    dayOfTheWeek: THU,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-12',
+    dayOfTheWeek: FRI,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-13',
+    dayOfTheWeek: SAT,
+    isPublicHoliday: false,
+  },
+  {
+    id: 'day-14',
+    dayOfTheWeek: SUN,
+    isPublicHoliday: false,
+  },
 ];
 
 const doctorStorageMock: DoctorStorageService = {
@@ -50,7 +114,9 @@ const doctorStorageMock: DoctorStorageService = {
 const dayStorageMock: DayStorageService = {
   updateItem() {},
   indexOf(givenDay) {
-    return dayListMock.findIndex((day) => day.id === givenDay.id);
+    return dayListMock.findIndex(
+      (day) => day.id === givenDay.id,
+    );
   },
   getItems() {
     return dayListMock;
@@ -102,7 +168,9 @@ const utilityMock: UtilityService = {
       .sort((former, latter) => former.key - latter.key)
       .map(({ index }) => index);
 
-    return list.map((_, index) => list[shuffledIndexes[index]]);
+    return list.map(
+      (_, index) => list[shuffledIndexes[index]],
+    );
   },
 };
 

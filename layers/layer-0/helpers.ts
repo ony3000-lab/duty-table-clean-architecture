@@ -3,7 +3,10 @@ import { SUN, FRI, SAT } from 'shared-kernel';
 import type { Day, Slot } from './entities';
 
 export function weightedValueOf(day: Day) {
-  if (day.isPublicHoliday || [SAT, SUN].includes(day.dayOfTheWeek)) {
+  if (
+    day.isPublicHoliday ||
+    [SAT, SUN].includes(day.dayOfTheWeek)
+  ) {
     return 2;
   }
 
@@ -19,11 +22,16 @@ export function isWeekend(day: Day) {
 }
 
 export function totalWeightedValueOf(slotList: Slot[]) {
-  return slotList.reduce((total, slot) => total + weightedValueOf(slot.day), 0);
+  return slotList.reduce(
+    (total, slot) => total + weightedValueOf(slot.day),
+    0,
+  );
 }
 
 export function areAllSlotsAssignedDoctor(
   slotList: Slot[],
 ): slotList is Required<Slot>[] {
-  return slotList.every((slot) => slot.doctor !== undefined);
+  return slotList.every(
+    (slot) => slot.doctor !== undefined,
+  );
 }

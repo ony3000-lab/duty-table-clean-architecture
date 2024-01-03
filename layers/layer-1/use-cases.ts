@@ -105,19 +105,29 @@ export async function calculateTimetable(deps: {
   slotStorageService: SlotStorageService;
   utilityService: UtilityService;
 }): Promise<Required<Slot>[]> {
-  const doctorList = deps.doctorStorageService.getItems().slice();
-  const slotList = deps.slotStorageService.getItems().map<Slot>((slot) => ({
-    ...slot,
-    doctor: undefined,
-  }));
+  const doctorList = deps.doctorStorageService
+    .getItems()
+    .slice();
+  const slotList = deps.slotStorageService
+    .getItems()
+    .map<Slot>((slot) => ({
+      ...slot,
+      doctor: undefined,
+    }));
 
   (function firstRound() {
-    const shuffledDoctorList = deps.utilityService.shuffle(doctorList);
-    const shuffledSlotList = deps.utilityService.shuffle(slotList);
-    const minLength = Math.min(doctorList.length, slotList.length);
+    const shuffledDoctorList =
+      deps.utilityService.shuffle(doctorList);
+    const shuffledSlotList =
+      deps.utilityService.shuffle(slotList);
+    const minLength = Math.min(
+      doctorList.length,
+      slotList.length,
+    );
 
     for (let index = 0; index < minLength; index += 1) {
-      shuffledSlotList[index].doctor = shuffledDoctorList[index];
+      shuffledSlotList[index].doctor =
+        shuffledDoctorList[index];
     }
   })();
 
@@ -129,12 +139,14 @@ export async function calculateTimetable(deps: {
     const doctorAssignedSlotList = slotList.filter(
       (slot) => slot.doctor !== undefined,
     ) as Required<Slot>[];
-    const shuffledWeekdaySlotList = deps.utilityService.shuffle(
-      slotList.filter((slot) => !isWeekend(slot.day)),
-    );
-    const shuffledWeekendSlotList = deps.utilityService.shuffle(
-      slotList.filter((slot) => isWeekend(slot.day)),
-    );
+    const shuffledWeekdaySlotList =
+      deps.utilityService.shuffle(
+        slotList.filter((slot) => !isWeekend(slot.day)),
+      );
+    const shuffledWeekendSlotList =
+      deps.utilityService.shuffle(
+        slotList.filter((slot) => isWeekend(slot.day)),
+      );
 
     doctorAssignedSlotList.forEach((doctorAssignedSlot) => {
       const availableSlotList = (
@@ -142,21 +154,27 @@ export async function calculateTimetable(deps: {
           ? shuffledWeekdaySlotList
           : shuffledWeekendSlotList
       ).filter((slot) => {
-        const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-        const indexOfDayOfDoctorAssignedSlot = deps.dayStorageService.indexOf(
-          doctorAssignedSlot.day,
-        );
+        const indexOfDayOfSlot =
+          deps.dayStorageService.indexOf(slot.day);
+        const indexOfDayOfDoctorAssignedSlot =
+          deps.dayStorageService.indexOf(
+            doctorAssignedSlot.day,
+          );
 
         return (
           slot.doctor === undefined &&
-          (indexOfDayOfSlot < indexOfDayOfDoctorAssignedSlot - BUFFER_DAYS ||
-            indexOfDayOfSlot > indexOfDayOfDoctorAssignedSlot + BUFFER_DAYS)
+          (indexOfDayOfSlot <
+            indexOfDayOfDoctorAssignedSlot - BUFFER_DAYS ||
+            indexOfDayOfSlot >
+              indexOfDayOfDoctorAssignedSlot + BUFFER_DAYS)
         );
       });
-      const firstAvailableSlotOrNot = availableSlotList.at(0);
+      const firstAvailableSlotOrNot =
+        availableSlotList.at(0);
 
       if (firstAvailableSlotOrNot) {
-        firstAvailableSlotOrNot.doctor = doctorAssignedSlot.doctor;
+        firstAvailableSlotOrNot.doctor =
+          doctorAssignedSlot.doctor;
       }
     });
   })();
@@ -182,159 +200,223 @@ export async function calculateTimetable(deps: {
 
           const availableSlotListOfFormerDoctor =
             doctorUnassignedSlotList.filter((slot) => {
-              const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-              const indexGroupOfDayOfSlot = Math.floor(indexOfDayOfSlot / 3.5);
+              const indexOfDayOfSlot =
+                deps.dayStorageService.indexOf(slot.day);
+              const indexGroupOfDayOfSlot = Math.floor(
+                indexOfDayOfSlot / 3.5,
+              );
 
-              return assignedSlotListOfFormer.every((doctorAssignedSlot) => {
-                const indexOfDayOfDoctorAssignedSlot =
-                  deps.dayStorageService.indexOf(doctorAssignedSlot.day);
-                const indexGroupOfDayOfDoctorAssignedSlot = Math.floor(
-                  indexOfDayOfDoctorAssignedSlot / 3.5,
-                );
+              return assignedSlotListOfFormer.every(
+                (doctorAssignedSlot) => {
+                  const indexOfDayOfDoctorAssignedSlot =
+                    deps.dayStorageService.indexOf(
+                      doctorAssignedSlot.day,
+                    );
+                  const indexGroupOfDayOfDoctorAssignedSlot =
+                    Math.floor(
+                      indexOfDayOfDoctorAssignedSlot / 3.5,
+                    );
 
-                return (
-                  indexGroupOfDayOfSlot !==
-                    indexGroupOfDayOfDoctorAssignedSlot &&
-                  (indexOfDayOfSlot <
-                    indexOfDayOfDoctorAssignedSlot - BUFFER_DAYS ||
-                    indexOfDayOfSlot >
-                      indexOfDayOfDoctorAssignedSlot + BUFFER_DAYS)
-                );
-              });
+                  return (
+                    indexGroupOfDayOfSlot !==
+                      indexGroupOfDayOfDoctorAssignedSlot &&
+                    (indexOfDayOfSlot <
+                      indexOfDayOfDoctorAssignedSlot -
+                        BUFFER_DAYS ||
+                      indexOfDayOfSlot >
+                        indexOfDayOfDoctorAssignedSlot +
+                          BUFFER_DAYS)
+                  );
+                },
+              );
             });
           const availableSlotListOfLatterDoctor =
             doctorUnassignedSlotList.filter((slot) => {
-              const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-              const indexGroupOfDayOfSlot = Math.floor(indexOfDayOfSlot / 3.5);
+              const indexOfDayOfSlot =
+                deps.dayStorageService.indexOf(slot.day);
+              const indexGroupOfDayOfSlot = Math.floor(
+                indexOfDayOfSlot / 3.5,
+              );
 
-              return assignedSlotListOfLatter.every((doctorAssignedSlot) => {
-                const indexOfDayOfDoctorAssignedSlot =
-                  deps.dayStorageService.indexOf(doctorAssignedSlot.day);
-                const indexGroupOfDayOfDoctorAssignedSlot = Math.floor(
-                  indexOfDayOfDoctorAssignedSlot / 3.5,
-                );
+              return assignedSlotListOfLatter.every(
+                (doctorAssignedSlot) => {
+                  const indexOfDayOfDoctorAssignedSlot =
+                    deps.dayStorageService.indexOf(
+                      doctorAssignedSlot.day,
+                    );
+                  const indexGroupOfDayOfDoctorAssignedSlot =
+                    Math.floor(
+                      indexOfDayOfDoctorAssignedSlot / 3.5,
+                    );
 
-                return (
-                  indexGroupOfDayOfSlot !==
-                    indexGroupOfDayOfDoctorAssignedSlot &&
-                  (indexOfDayOfSlot <
-                    indexOfDayOfDoctorAssignedSlot - BUFFER_DAYS ||
-                    indexOfDayOfSlot >
-                      indexOfDayOfDoctorAssignedSlot + BUFFER_DAYS)
-                );
-              });
+                  return (
+                    indexGroupOfDayOfSlot !==
+                      indexGroupOfDayOfDoctorAssignedSlot &&
+                    (indexOfDayOfSlot <
+                      indexOfDayOfDoctorAssignedSlot -
+                        BUFFER_DAYS ||
+                      indexOfDayOfSlot >
+                        indexOfDayOfDoctorAssignedSlot +
+                          BUFFER_DAYS)
+                  );
+                },
+              );
             });
 
-          if (availableSlotListOfFormerDoctor.length === 0) {
+          if (
+            availableSlotListOfFormerDoctor.length === 0
+          ) {
             return 1;
           }
-          if (availableSlotListOfLatterDoctor.length === 0) {
+          if (
+            availableSlotListOfLatterDoctor.length === 0
+          ) {
             return -1;
           }
 
           return (
-            assignedSlotListOfFormer.length - assignedSlotListOfLatter.length ||
+            assignedSlotListOfFormer.length -
+              assignedSlotListOfLatter.length ||
             totalWeightedValueOf(
-              slotList.filter((slot) => slot.doctor?.id === formerDoctor.id),
+              slotList.filter(
+                (slot) =>
+                  slot.doctor?.id === formerDoctor.id,
+              ),
             ) -
               totalWeightedValueOf(
-                slotList.filter((slot) => slot.doctor?.id === latterDoctor.id),
+                slotList.filter(
+                  (slot) =>
+                    slot.doctor?.id === latterDoctor.id,
+                ),
               ) ||
             availableSlotListOfFormerDoctor.length -
               availableSlotListOfLatterDoctor.length
           );
         });
-      const doctorWithLeastWeightedValueOrNot = orderedDoctorList.at(0);
+      const doctorWithLeastWeightedValueOrNot =
+        orderedDoctorList.at(0);
 
       if (!doctorWithLeastWeightedValueOrNot) {
-        throw new Error('배정할 수 있는 Doctor가 없습니다.');
+        throw new Error(
+          '배정할 수 있는 Doctor가 없습니다.',
+        );
       }
 
       const doctorAssignedSlotList = slotList.filter(
-        (slot) => slot.doctor?.id === doctorWithLeastWeightedValueOrNot.id,
+        (slot) =>
+          slot.doctor?.id ===
+          doctorWithLeastWeightedValueOrNot.id,
       ) as Required<Slot>[];
       const orderedAvailableSlotList = slotList
         .filter((slot) => {
-          const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-          const indexGroupOfDayOfSlot = Math.floor(indexOfDayOfSlot / 3.5);
+          const indexOfDayOfSlot =
+            deps.dayStorageService.indexOf(slot.day);
+          const indexGroupOfDayOfSlot = Math.floor(
+            indexOfDayOfSlot / 3.5,
+          );
 
           return (
             slot.doctor === undefined &&
-            doctorAssignedSlotList.every((doctorAssignedSlot) => {
-              const indexOfDayOfDoctorAssignedSlot =
-                deps.dayStorageService.indexOf(doctorAssignedSlot.day);
-              const indexGroupOfDayOfDoctorAssignedSlot = Math.floor(
-                indexOfDayOfDoctorAssignedSlot / 3.5,
-              );
+            doctorAssignedSlotList.every(
+              (doctorAssignedSlot) => {
+                const indexOfDayOfDoctorAssignedSlot =
+                  deps.dayStorageService.indexOf(
+                    doctorAssignedSlot.day,
+                  );
+                const indexGroupOfDayOfDoctorAssignedSlot =
+                  Math.floor(
+                    indexOfDayOfDoctorAssignedSlot / 3.5,
+                  );
 
-              return (
-                indexGroupOfDayOfSlot !== indexGroupOfDayOfDoctorAssignedSlot &&
-                (indexOfDayOfSlot <
-                  indexOfDayOfDoctorAssignedSlot - BUFFER_DAYS ||
-                  indexOfDayOfSlot >
-                    indexOfDayOfDoctorAssignedSlot + BUFFER_DAYS)
-              );
-            })
+                return (
+                  indexGroupOfDayOfSlot !==
+                    indexGroupOfDayOfDoctorAssignedSlot &&
+                  (indexOfDayOfSlot <
+                    indexOfDayOfDoctorAssignedSlot -
+                      BUFFER_DAYS ||
+                    indexOfDayOfSlot >
+                      indexOfDayOfDoctorAssignedSlot +
+                        BUFFER_DAYS)
+                );
+              },
+            )
           );
         })
         .sort((formerSlot, latterSlot) => {
-          const indexOfDayOfFormerSlot = deps.dayStorageService.indexOf(
-            formerSlot.day,
-          );
+          const indexOfDayOfFormerSlot =
+            deps.dayStorageService.indexOf(formerSlot.day);
           const indexGroupOfDayOfFormerSlot = Math.floor(
             indexOfDayOfFormerSlot / 3.5,
           );
-          const adjacentSlotListOfFormerSlot = slotList.filter((slot) => {
-            const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-            const indexGroupOfDayOfSlot = Math.floor(indexOfDayOfSlot / 3.5);
+          const adjacentSlotListOfFormerSlot =
+            slotList.filter((slot) => {
+              const indexOfDayOfSlot =
+                deps.dayStorageService.indexOf(slot.day);
+              const indexGroupOfDayOfSlot = Math.floor(
+                indexOfDayOfSlot / 3.5,
+              );
 
-            return (
-              indexGroupOfDayOfSlot === indexGroupOfDayOfFormerSlot ||
-              (indexOfDayOfSlot >= indexOfDayOfFormerSlot - BUFFER_DAYS &&
-                indexOfDayOfSlot <= indexOfDayOfFormerSlot + BUFFER_DAYS)
+              return (
+                indexGroupOfDayOfSlot ===
+                  indexGroupOfDayOfFormerSlot ||
+                (indexOfDayOfSlot >=
+                  indexOfDayOfFormerSlot - BUFFER_DAYS &&
+                  indexOfDayOfSlot <=
+                    indexOfDayOfFormerSlot + BUFFER_DAYS)
+              );
+            });
+          const availableDoctorListOfFormerSlot =
+            doctorList.filter((doctor) =>
+              adjacentSlotListOfFormerSlot.every(
+                (slot) => slot.doctor?.id !== doctor.id,
+              ),
             );
-          });
-          const availableDoctorListOfFormerSlot = doctorList.filter((doctor) =>
-            adjacentSlotListOfFormerSlot.every(
-              (slot) => slot.doctor?.id !== doctor.id,
-            ),
-          );
 
-          const indexOfDayOfLatterSlot = deps.dayStorageService.indexOf(
-            latterSlot.day,
-          );
+          const indexOfDayOfLatterSlot =
+            deps.dayStorageService.indexOf(latterSlot.day);
           const indexGroupOfDayOfLatterSlot = Math.floor(
             indexOfDayOfLatterSlot / 3.5,
           );
-          const adjacentSlotListOfLatterSlot = slotList.filter((slot) => {
-            const indexOfDayOfSlot = deps.dayStorageService.indexOf(slot.day);
-            const indexGroupOfDayOfSlot = Math.floor(indexOfDayOfSlot / 3.5);
+          const adjacentSlotListOfLatterSlot =
+            slotList.filter((slot) => {
+              const indexOfDayOfSlot =
+                deps.dayStorageService.indexOf(slot.day);
+              const indexGroupOfDayOfSlot = Math.floor(
+                indexOfDayOfSlot / 3.5,
+              );
 
-            return (
-              indexGroupOfDayOfSlot === indexGroupOfDayOfLatterSlot ||
-              (indexOfDayOfSlot >= indexOfDayOfLatterSlot - BUFFER_DAYS &&
-                indexOfDayOfSlot <= indexOfDayOfLatterSlot + BUFFER_DAYS)
+              return (
+                indexGroupOfDayOfSlot ===
+                  indexGroupOfDayOfLatterSlot ||
+                (indexOfDayOfSlot >=
+                  indexOfDayOfLatterSlot - BUFFER_DAYS &&
+                  indexOfDayOfSlot <=
+                    indexOfDayOfLatterSlot + BUFFER_DAYS)
+              );
+            });
+          const availableDoctorListOfLatterSlot =
+            doctorList.filter((doctor) =>
+              adjacentSlotListOfLatterSlot.every(
+                (slot) => slot.doctor?.id !== doctor.id,
+              ),
             );
-          });
-          const availableDoctorListOfLatterSlot = doctorList.filter((doctor) =>
-            adjacentSlotListOfLatterSlot.every(
-              (slot) => slot.doctor?.id !== doctor.id,
-            ),
-          );
 
           return (
-            weightedValueOf(latterSlot.day) - weightedValueOf(formerSlot.day) ||
+            weightedValueOf(latterSlot.day) -
+              weightedValueOf(formerSlot.day) ||
             availableDoctorListOfFormerSlot.length -
               availableDoctorListOfLatterSlot.length
           );
         });
-      const slotWithMostWeightedValueOrNot = orderedAvailableSlotList.at(0);
+      const slotWithMostWeightedValueOrNot =
+        orderedAvailableSlotList.at(0);
 
       if (!slotWithMostWeightedValueOrNot) {
         throw new Error('배정할 수 있는 Slot이 없습니다.');
       }
 
-      slotWithMostWeightedValueOrNot.doctor = doctorWithLeastWeightedValueOrNot;
+      slotWithMostWeightedValueOrNot.doctor =
+        doctorWithLeastWeightedValueOrNot;
     }
   })();
 
