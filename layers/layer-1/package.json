@@ -3,6 +3,7 @@
   "name": "layer-1",
   "version": "0.0.0",
   "dependencies": {
-    "layer-0": "workspace:*"
+    "layer-0": "workspace:*",
+    "shared-kernel": "workspace:*"
   }
 }

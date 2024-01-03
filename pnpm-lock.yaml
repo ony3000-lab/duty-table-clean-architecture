@@ -106,6 +106,9 @@ importers:
       rimraf:
         specifier: 5.0.1
         version: 5.0.1
+      shared-kernel:
+        specifier: workspace:*
+        version: link:shared-kernel
       tailwindcss:
         specifier: 3.2.7
         version: 3.2.7(postcss@8.4.21)
@@ -113,13 +116,20 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
 
-  layers/layer-0: {}
+  layers/layer-0:
+    dependencies:
+      shared-kernel:
+        specifier: workspace:*
+        version: link:../../shared-kernel
 
   layers/layer-1:
     dependencies:
       layer-0:
         specifier: workspace:*
         version: link:../layer-0
+      shared-kernel:
+        specifier: workspace:*
+        version: link:../../shared-kernel
 
   layers/layer-2:
     dependencies:
@@ -141,6 +151,9 @@ importers:
       radash:
         specifier: 11.0.0
         version: 11.0.0
+      shared-kernel:
+        specifier: workspace:*
+        version: link:../../shared-kernel
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -153,6 +166,11 @@ importers:
       layer-2:
         specifier: workspace:*
         version: link:../layer-2
+      shared-kernel:
+        specifier: workspace:*
+        version: link:../../shared-kernel
+
+  shared-kernel: {}
 
 packages:
 

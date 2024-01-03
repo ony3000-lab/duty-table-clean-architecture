@@ -1,3 +1,5 @@
+import { SUN, FRI, SAT } from 'shared-kernel';
+
 import type { Day, Slot } from './entities';
 
 export function weightedValueOf(day: Day) {

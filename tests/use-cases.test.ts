@@ -1,4 +1,6 @@
 /* eslint-disable import/no-relative-packages */
+import { SUN, MON, TUE, WED, THU, FRI, SAT } from 'shared-kernel';
+
 import type {
   DoctorStorageService,
   DayStorageService,

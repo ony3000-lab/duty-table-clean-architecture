@@ -9,6 +9,7 @@
     "layer-1": "workspace:*",
     "nanostores": "0.9.5",
     "radash": "11.0.0",
+    "shared-kernel": "workspace:*",
     "uuid": "9.0.1"
   }
 }

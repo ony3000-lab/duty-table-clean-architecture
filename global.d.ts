@@ -1,18 +1,13 @@
-const SUN = 0;
-const MON = 1;
-const TUE = 2;
-const WED = 3;
-const THU = 4;
-const FRI = 5;
-const SAT = 6;
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { SUN, MON, TUE, WED, THU, FRI, SAT } from 'shared-kernel';
 
-type DayOfTheWeek =
-  | typeof SUN
-  | typeof MON
-  | typeof TUE
-  | typeof WED
-  | typeof THU
-  | typeof FRI
-  | typeof SAT;
-
-const BUFFER_DAYS = 2;
+declare global {
+  type DayOfTheWeek =
+    | typeof SUN
+    | typeof MON
+    | typeof TUE
+    | typeof WED
+    | typeof THU
+    | typeof FRI
+    | typeof SAT;
+}

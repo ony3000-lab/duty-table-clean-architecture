@@ -16,18 +16,6 @@ const customJestConfig = {
   },
 
   testEnvironment: 'jest-environment-jsdom',
-
-  // global.d.ts에 정의한 상수와 같음
-  globals: {
-    SUN: 0,
-    MON: 1,
-    TUE: 2,
-    WED: 3,
-    THU: 4,
-    FRI: 5,
-    SAT: 6,
-    BUFFER_DAYS: 2,
-  },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

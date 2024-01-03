@@ -5,6 +5,7 @@ import {
   totalWeightedValueOf,
   areAllSlotsAssignedDoctor,
 } from 'layer-0/helpers';
+import { BUFFER_DAYS } from 'shared-kernel';
 
 import type {
   UniqueIDService,
