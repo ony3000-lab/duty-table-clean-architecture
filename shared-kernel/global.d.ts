@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { SUN, MON, TUE, WED, THU, FRI, SAT } from 'shared-kernel';
+import { SUN, MON, TUE, WED, THU, FRI, SAT } from './index';
 
 declare global {
   type DayOfTheWeek =
