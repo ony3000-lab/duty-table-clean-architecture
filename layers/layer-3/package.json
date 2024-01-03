@@ -3,6 +3,7 @@
   "name": "layer-3",
   "version": "0.0.0",
   "dependencies": {
+    "@heroicons/react": "2.1.1",
     "layer-2": "workspace:*"
   }
 }
