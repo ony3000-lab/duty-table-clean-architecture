@@ -52,6 +52,9 @@ const dayStorageMock: DayStorageService = {
   indexOf(givenDay) {
     return dayListMock.findIndex((day) => day.id === givenDay.id);
   },
+  getItems() {
+    return dayListMock;
+  },
 };
 const slotStorageMock: SlotStorageService = {
   addItem() {},
