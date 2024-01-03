@@ -8,7 +8,7 @@
     "dev": "rimraf .next && next dev",
     "build": "rimraf .next && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --dir .",
     "test": "jest --ci --passWithNoTests",
     "test:watch": "jest --watch"
   },
