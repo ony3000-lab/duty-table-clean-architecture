@@ -24,6 +24,7 @@
       {
         "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
       }
-    ]
+    ],
+    "@typescript-eslint/consistent-type-imports": 2
   }
 }
